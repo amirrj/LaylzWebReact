@@ -1,0 +1,13 @@
+.social__tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 150px;
+  flex: 0 0 43%;
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary-light),
+    var(--primary-dark)
+  );
+}

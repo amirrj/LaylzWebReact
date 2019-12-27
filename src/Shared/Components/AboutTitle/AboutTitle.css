@@ -1,0 +1,33 @@
+.about__heading {
+  margin-top: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.about__title {
+  font-family: var(--heading-primary);
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  text-align: center;
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    to right,
+    var(--primary-dark),
+    var(--primary-light)
+  );
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+}
+
+.about__border {
+  height: 0.5rem;
+  width: 60%;
+  background-color: var(--primary-dark);
+}

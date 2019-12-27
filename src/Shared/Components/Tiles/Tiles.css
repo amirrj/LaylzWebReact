@@ -1,0 +1,43 @@
+.tile {
+  height: 190px;
+  margin: 1.5rem 1rem;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.tile__text-box {
+  padding: 2rem;
+  border: 0.7rem solid #fff;
+  height: 110px;
+  width: 80%;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile__text {
+  font-family: var(--heading-primary);
+  font-size: 7rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tile__text-shrink {
+  font-size: 5rem;
+}

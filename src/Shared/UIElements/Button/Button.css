@@ -1,0 +1,32 @@
+.button-box {
+  position: absolute;
+  right: 50%;
+  bottom: 2rem;
+  z-index: 99;
+  transform: translate(50%, -50%);
+  z-index: 100;
+
+  display: flex;
+}
+
+.button-box--testimonial {
+  bottom: 0;
+}
+
+.button {
+  position: relative;
+  height: 1.8rem;
+  width: 1.8rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  transition: 0.5s all ease;
+  cursor: pointer;
+}
+
+.button--active {
+  background-color: var(--primary-dark);
+}
+
+.button:not(:last-child) {
+  margin-right: 1.5rem;
+}

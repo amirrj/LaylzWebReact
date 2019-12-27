@@ -1,0 +1,27 @@
+.slideShow {
+  position: relative;
+  height: 50vh;
+}
+
+.slideShow__photos {
+  position: absolute;
+  top: 0rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slideShow__photos::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.slideShow__button:not(:last-child) {
+  margin-right: 1.5rem;
+}
