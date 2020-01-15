@@ -1,0 +1,15 @@
+.navigationList {
+  list-style: none;
+  padding: 1rem;
+  margin-left: 3rem;
+}
+
+.navigationListContainer {
+  width: 80%;
+  margin: 0 2rem;
+  position: relative;
+  top: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

@@ -1,0 +1,15 @@
+.navigationListItem {
+  padding: 1.5rem 1rem;
+}
+
+.navigationListItemLink {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: black;
+}
+
+.navigationListItem:not(:last-child) {
+  border-bottom: 2px solid var(--grey-dark);
+}

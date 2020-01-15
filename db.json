@@ -1,0 +1,124 @@
+{
+  "BeautyAbout": {
+    "id": "BA1",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Animi maxime quis quibusdam iusto expedita.Perferendis, officiis at? Illo fugit ex quaerat earum libero? Exercitationem, repellat nesciunt unde sed vitae nihil ex placeat, necessitatibus deleniti culpa temporibus eveniet Officia aliquam, temporibus quis quo quasi numquam ut? Autem obcaecati harum asperiores qui hic soluta, earum, eveniet ex distinctio quis aliquam sequi nihil in totam libero cupiditate sunt odit quaerat blanditiis, ratione quod explicabo excepturi."
+  },
+  "CakeAbout": {
+    "id": "CA1",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Animi maxime quis quibusdam iusto expedita.Perferendis, officiis at? Illo fugit ex quaerat earum libero? Exercitationem, repellat nesciunt unde sed vitae nihil ex placeat, necessitatibus deleniti culpa temporibus eveniet Officia aliquam, temporibus quis quo quasi numquam ut? Autem obcaecati harum asperiores qui hic soluta, earum, eveniet ex distinctio quis aliquam sequi nihil in totam libero cupiditate sunt odit quaerat blanditiis, ratione quod explicabo excepturi."
+  },
+  "BeautyServices": [
+    {
+      "id": "bs1",
+      "service": "Bridal Service",
+      "img": "http://localhost:3000/images/beautyservices-tile1.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    },
+    {
+      "id": "bs2",
+      "service": "Party Hair",
+      "img": "http://localhost:3000/images/beautyservices-tile2.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    },
+    {
+      "id": "bs3",
+      "service": "Make Up",
+      "img": "http://localhost:3000/images/beautyservices-tile3.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    }
+  ],
+  "CakeServices": [
+    {
+      "id": "CS1",
+      "service": "Cake",
+      "img": "http://localhost:3000/images/cakeservices-tile1.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    },
+    {
+      "id": "CS2",
+      "service": "CupCake",
+      "img": "http://localhost:3000/images/cakeservices-tile2.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    },
+    {
+      "id": "CS3",
+      "service": "Brownies",
+      "img": "http://localhost:3000/images/cakeservices-tile3.jpg",
+      "detail": "As ipsum dolor sit amet consectetur adipisicing elit.Quibusdam animi aperiam nihil aspernatur numquam reprehenderit, debitis praesentium earum neque inventore.",
+      "price": 25.9,
+      "open": false
+    }
+  ],
+  "BeautyWork": [
+    {
+      "id": "bw1",
+      "title": "Bridal Project",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptatum, facere dicta rerum harum sequi officiis? Repellendus, facilis eveniet nihil facere nostrum odio a enim",
+      "date": "OCT.8, 2019",
+      "thumbnail": "http://localhost:3000/images/beautywork-img1.jpg",
+      "images": [
+        {
+          "id": "bw1i1",
+          "image": "http://localhost:3000/images/beautywork-img1.jpg",
+          "show": true
+        },
+        {
+          "id": "bw1i2",
+          "image": "http://localhost:3000/images/beautywork-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "bw1i3",
+          "image": "http://localhost:3000/images/beautywork-img1.jpg",
+          "show": false
+        },
+        {
+          "id": "bw1i4",
+          "image": "http://localhost:3000/images/beautywork-img1.jpg",
+          "show": false
+        }
+      ]
+    },
+    {
+      "id": "bw2",
+      "title": "Bridal Project",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptatum, facere dicta rerum harum sequi officiis? Repellendus, facilis eveniet nihil facere nostrum odio a enim",
+      "date": "OCT.8, 2019",
+      "thumbnail": "http://localhost:3000/images/beautywork-img2.jpg",
+      "images": [
+        {
+          "id": "bw2i1",
+          "image": "http://localhost:3000/images/beautywork-img2.jpg",
+          "show": true
+        },
+        {
+          "id": "bw2i2",
+          "image": "http://localhost:3000/images/beautywork-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "bw3i3",
+          "image": "http://localhost:3000/images/beautywork-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "bw4i4",
+          "image": "http://localhost:3000/images/beautywork-img2.jpg",
+          "show": false
+        }
+      ]
+    }
+  ]
+}

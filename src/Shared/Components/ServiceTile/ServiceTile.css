@@ -1,0 +1,54 @@
+.serviceTile {
+  margin: 1.5rem 1rem;
+}
+
+.serviceTile__box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2rem;
+
+  position: relative;
+}
+
+.serviceTile__box::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.serviceTile__box-title {
+  width: 25rem;
+  font-size: 2rem;
+  font-family: var(--heading-primary);
+  color: #fff;
+  position: relative;
+  z-index: 3;
+}
+
+.serviceTile__box-icons {
+  width: 5rem;
+  height: 5rem;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  fill: #fff;
+  position: relative;
+  z-index: 3;
+}
+
+.serviceTile__text {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.6rem;
+  border-bottom: 1px solid var(--grey-dark);
+}
+
+.serviceTile__price {
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 1rem;
+}

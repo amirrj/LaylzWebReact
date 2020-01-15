@@ -1,0 +1,77 @@
+.navigationIcon,
+.openNavigationIcon {
+  position: fixed;
+  top: 3rem;
+  left: 2rem;
+  background-color: #fff;
+  width: 4rem;
+  height: 0.6rem;
+  border-radius: 10px;
+
+  z-index: 9999999999;
+}
+
+.navigationIcon::before {
+  content: '';
+  position: fixed;
+  top: 1.7rem;
+  left: 2rem;
+  background-color: #fff;
+  width: 4rem;
+  height: 0.6rem;
+  border-radius: 10px;
+
+  z-index: 9999999999;
+}
+
+.navigationIcon::after {
+  content: '';
+  position: fixed;
+  top: 4.3rem;
+  left: 2rem;
+  background-color: #fff;
+  width: 4rem;
+  height: 0.6rem;
+  border-radius: 10px;
+
+  z-index: 9999999999;
+}
+
+.openNavigationIcon {
+  visibility: hidden;
+}
+
+.openNavigationIcon::before {
+  content: '';
+  display: block;
+  visibility: visible;
+  position: fixed;
+  top: 3rem;
+  width: 4rem;
+  height: 0.6rem;
+  border-radius: 10px;
+  transform: rotate(45deg);
+  background: linear-gradient(
+    to right,
+    var(--primary-dark),
+    var(--primary-light)
+  );
+}
+
+.openNavigationIcon::after {
+  content: '';
+  display: block;
+  visibility: visible;
+  position: fixed;
+  top: 3rem;
+  width: 4rem;
+  height: 0.6rem;
+  border-radius: 10px;
+  transform: rotate(-45deg);
+
+  background: linear-gradient(
+    to left,
+    var(--primary-dark),
+    var(--primary-light)
+  );
+}

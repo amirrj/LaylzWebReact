@@ -1,0 +1,14 @@
+.slideShow__work__detail {
+  height: 70vh;
+}
+
+.work__detail-text {
+  font-size: 1.6rem;
+  padding: 1rem 0;
+}
+
+.work__detail-title {
+  font-size: 2.5rem;
+  font-family: var(--heading-primary);
+  padding: 1rem;
+}
