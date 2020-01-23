@@ -7,19 +7,15 @@ import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
 import './BeautyServices.css';
 
 class BeautyServices extends React.Component {
-  state = {
-    BeautyServices: []
-  };
+  state = {};
 
   componentDidMount() {
-    axios
-      .get('https://my-json-server.typicode.com/amirrj/demo/BeautyServices')
-      .then(res => {
-        const BeautyServices = res.data;
-        this.setState({
-          BeautyServices
-        });
+    axios.get('http://localhost:5000/api/beautyservices').then(res => {
+      const BeautyServices = res.data;
+      this.setState({
+        BeautyServices
       });
+    });
   }
 
   openServiceHandler = id => {
@@ -32,7 +28,7 @@ class BeautyServices extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.BeautyServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImage}>
           <h1 className="services__title">
@@ -44,6 +40,8 @@ class BeautyServices extends React.Component {
           services={this.state.BeautyServices}
         />
       </React.Fragment>
+    ) : (
+      <p>loading</p>
     );
   }
 }

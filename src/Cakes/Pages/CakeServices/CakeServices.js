@@ -8,19 +8,15 @@ import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
 import './CakeServices.css';
 
 class CakeServices extends React.Component {
-  state = {
-    CakeServices: []
-  };
+  state = {};
 
   componentDidMount() {
-    axios
-      .get('https://my-json-server.typicode.com/amirrj/demo/CakeServices')
-      .then(res => {
-        const CakeServices = res.data;
-        this.setState({
-          CakeServices
-        });
+    axios.get('http://localhost:5000/api/cakeservices').then(res => {
+      const CakeServices = res.data;
+      this.setState({
+        CakeServices
       });
+    });
   }
 
   openServiceHandler = id => {
@@ -33,7 +29,7 @@ class CakeServices extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.CakeServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImg}>
           <h1 className="services__title">
@@ -45,6 +41,8 @@ class CakeServices extends React.Component {
           services={this.state.CakeServices}
         />
       </React.Fragment>
+    ) : (
+      <p>loading</p>
     );
   }
 }

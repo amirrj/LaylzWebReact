@@ -1,10 +1,10 @@
 {
   "BeautyAbout": {
-    "id": "BA1",
+    "id": "ba1",
     "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Animi maxime quis quibusdam iusto expedita.Perferendis, officiis at? Illo fugit ex quaerat earum libero? Exercitationem, repellat nesciunt unde sed vitae nihil ex placeat, necessitatibus deleniti culpa temporibus eveniet Officia aliquam, temporibus quis quo quasi numquam ut? Autem obcaecati harum asperiores qui hic soluta, earum, eveniet ex distinctio quis aliquam sequi nihil in totam libero cupiditate sunt odit quaerat blanditiis, ratione quod explicabo excepturi."
   },
   "CakeAbout": {
-    "id": "CA1",
+    "id": "ca1",
     "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Animi maxime quis quibusdam iusto expedita.Perferendis, officiis at? Illo fugit ex quaerat earum libero? Exercitationem, repellat nesciunt unde sed vitae nihil ex placeat, necessitatibus deleniti culpa temporibus eveniet Officia aliquam, temporibus quis quo quasi numquam ut? Autem obcaecati harum asperiores qui hic soluta, earum, eveniet ex distinctio quis aliquam sequi nihil in totam libero cupiditate sunt odit quaerat blanditiis, ratione quod explicabo excepturi."
   },
   "BeautyServices": [
@@ -120,5 +120,155 @@
         }
       ]
     }
-  ]
+  ],
+  "CakeWork": [
+    {
+      "id": "cw1",
+      "title": "Bithday Party Project",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptatum, facere dicta rerum harum sequi officiis? Repellendus, facilis eveniet nihil facere nostrum odio a enim",
+      "date": "OCT.8, 2019",
+      "thumbnail": "http://localhost:3000/images/cakework-img1.jpg",
+      "images": [
+        {
+          "id": "cw1i1",
+          "image": "http://localhost:3000/images/cakework-img1.jpg",
+          "show": true
+        },
+        {
+          "id": "cw1i2",
+          "image": "http://localhost:3000/images/cakework-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "cw1i3",
+          "image": "http://localhost:3000/images/cakework-img1.jpg",
+          "show": false
+        },
+        {
+          "id": "cw1i4",
+          "image": "http://localhost:3000/images/cakework-img1.jpg",
+          "show": false
+        }
+      ]
+    },
+    {
+      "id": "cw2",
+      "title": "Baby Shower Project",
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptatum, facere dicta rerum harum sequi officiis? Repellendus, facilis eveniet nihil facere nostrum odio a enim",
+      "date": "OCT.8, 2019",
+      "thumbnail": "http://localhost:3000/images/cakework-img2.jpg",
+      "images": [
+        {
+          "id": "cw2i1",
+          "image": "http://localhost:3000/images/cakework-img2.jpg",
+          "show": true
+        },
+        {
+          "id": "cw2i2",
+          "image": "http://localhost:3000/images/cakework-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "cw3i3",
+          "image": "http://localhost:3000/images/cakework-img2.jpg",
+          "show": false
+        },
+        {
+          "id": "cw4i4",
+          "image": "http://localhost:3000/images/cakework-img2.jpg",
+          "show": false
+        }
+      ]
+    }
+  ],
+  "BeautyHome": {
+    "BeautySlideShow": [
+      {
+        "id": "BI1",
+        "image": "http://localhost:3000/images/slideshowBeauty-img1.jpg",
+        "show": true
+      },
+      {
+        "id": "BI2",
+        "image": "http://localhost:3000/images/slideshowBeauty-img2.jpg",
+        "show": false
+      },
+      {
+        "id": "BI3",
+        "image": "http://localhost:3000/images/slideshowBeauty-img3.jpg",
+        "show": false
+      },
+      {
+        "id": "BI4",
+        "image": "http://localhost:3000/images/slideshowBeauty-img4.jpg",
+        "show": false
+      }
+    ],
+    "BeautyTestimonials": [
+      {
+        "id": "BT1",
+        "author": "Person1",
+        "text": "Lorem ipsum dolor sit amet.",
+        "show": true
+      },
+      {
+        "id": "BT2",
+        "author": "Person2",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos",
+        "show": false
+      },
+      {
+        "id": "BT3",
+        "author": "Person3",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos",
+        "show": false
+      }
+    ]
+  },
+  "CakeHome": {
+    "CakeSlideShow": [
+      {
+        "id": "ci1",
+        "image": "http://localhost:3000/images/slideshowCake-img1.jpg",
+        "show": true
+      },
+      {
+        "id": "ci2",
+        "image": "http://localhost:3000/images/slideshowCake-img2.jpg",
+        "show": false
+      },
+      {
+        "id": "ci3",
+        "image": "http://localhost:3000/images/slideshowCake-img3.jpg",
+        "show": false
+      },
+      {
+        "id": "ci4",
+        "image": "http://localhost:3000/images/slideshowCake-img4.jpg",
+        "show": false
+      }
+    ],
+    "CakeTestimonials": [
+      {
+        "id": "ct1",
+        "author": "Person1",
+        "text": "Lorem ipsum dolor sit amet.",
+        "show": true
+      },
+      {
+        "id": "ct2",
+        "author": "Person2",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos",
+        "show": false
+      },
+      {
+        "id": "ct3",
+        "author": "Person3",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos",
+        "show": false
+      }
+    ]
+  }
 }

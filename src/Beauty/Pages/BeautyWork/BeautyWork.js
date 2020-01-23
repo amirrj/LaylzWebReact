@@ -5,23 +5,23 @@ import WorkTile from '../../../Shared/Components/WorkTile/WorkTile';
 import './BeautyWork.css';
 
 class BeautyWork extends React.Component {
-  state = {
-    BeautyWork: []
-  };
+  state = {};
 
   componentDidMount() {
-    axios
-      .get('https://my-json-server.typicode.com/amirrj/demo/BeautyWork')
-      .then(res => {
-        const BeautyWork = res.data;
-        this.setState({
-          BeautyWork
-        });
+    axios.get('http://localhost:5000/api/beautywork').then(res => {
+      const BeautyWork = res.data;
+      this.setState({
+        BeautyWork
       });
+    });
   }
 
   render() {
-    return <WorkTile type={'beauty'} work={this.state.BeautyWork} />;
+    return this.state.BeautyWork ? (
+      <WorkTile type={'beauty'} work={this.state.BeautyWork} />
+    ) : (
+      <p>Loading</p>
+    );
   }
 }
 

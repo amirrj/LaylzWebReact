@@ -1,9 +1,5 @@
 import React from 'react';
-
-import SlideShowBeautyImg1 from '../../../Assets/Beauty/Slideshow-img/slideshow-beauty-img1.jpg';
-import SlideShowBeautyImg2 from '../../../Assets/Beauty/Slideshow-img/slideshow-beauty-img2.jpg';
-import SlideShowBeautyImg3 from '../../../Assets/Beauty/Slideshow-img/slideshow-beauty-img3.jpg';
-import SlideShowBeautyImg4 from '../../../Assets/Beauty/Slideshow-img/slideshow-beauty-img4.jpg';
+import axios from 'axios';
 
 import tileBeautyImg1 from '../../../Assets/Beauty/homeMenuBG/beauty-tile1.jpg';
 import tileBeautyImg2 from '../../../Assets/Beauty/homeMenuBG/beauty-tile2.jpg';
@@ -19,40 +15,25 @@ import './BeautyHome.css';
 
 class BeautyHome extends React.Component {
   state = {
-    BeautySlideShowImages: [
-      { id: 'BI1', image: SlideShowBeautyImg1, show: true },
-      { id: 'BI2', image: SlideShowBeautyImg2, show: false },
-      { id: 'BI3', image: SlideShowBeautyImg3, show: false },
-      { id: 'BI4', image: SlideShowBeautyImg4, show: false }
-    ],
+    BeautySlideShowImages: [],
     beautyMenuItems: [
       { id: 'ML1', text: 'About', image: tileBeautyImg1 },
       { id: 'ML2', text: 'Work', image: tileBeautyImg2 },
       { id: 'ML3', text: 'Services', image: tileBeautyImg3 }
     ],
-    BeautyTestimonials: [
-      {
-        id: 'BT1',
-        author: 'Person1',
-        text: 'Lorem ipsum dolor sit amet.',
-        show: true
-      },
-      {
-        id: 'BT2',
-        author: 'Person2',
-        text:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos',
-        show: false
-      },
-      {
-        id: 'BT3',
-        author: 'Person3',
-        text:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos',
-        show: false
-      }
-    ]
+    BeautyTestimonials: []
   };
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/beautyhome').then(res => {
+      const BeautySlideShowImages = res.data.BeautySlideShow;
+      const BeautyTestimonials = res.data.BeautyTestimonials;
+      this.setState({
+        BeautySlideShowImages: BeautySlideShowImages,
+        BeautyTestimonials: BeautyTestimonials
+      });
+    });
+  }
 
   changeActiveImage = id => {
     const displayImage = this.state.BeautySlideShowImages.filter(
@@ -97,7 +78,10 @@ class BeautyHome extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.BeautySlideShowImages.length === 0 ||
+      this.state.BeautyTestimonials.length === 0 ? (
+      <p>Loading</p>
+    ) : (
       <React.Fragment>
         <SlideShow
           imageChangeHandler={this.changeActiveImage}

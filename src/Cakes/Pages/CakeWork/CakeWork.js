@@ -1,35 +1,25 @@
 import React from 'react';
-
-import CakeWorkImg1 from '../../../Assets/Cakes/cake-work-img1.jpg';
-import CakeWorkImg2 from '../../../Assets/Cakes/cake-work-img2.jpg';
+import axios from 'axios';
 
 import WorkTile from '../../../Shared/Components/WorkTile/WorkTile';
 import './CakeWork.css';
 
 class CakeWork extends React.Component {
-  state = {
-    CakeWork: [
-      {
-        id: 'cw1',
-        title: 'Baby Shower',
-        text:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.',
-        date: 'OCT.8, 2019',
-        thumbnail: CakeWorkImg1
-      },
-      {
-        id: 'cw2',
-        title: 'Birthday Party',
-        text:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, expedita.',
-        date: 'OCT.8, 2019',
-        thumbnail: CakeWorkImg2
-      }
-    ]
-  };
+  state = {};
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/cakework').then(res => {
+      const CakeWork = res.data;
+      this.setState({ CakeWork });
+    });
+  }
 
   render() {
-    return <WorkTile work={this.state.CakeWork} />;
+    return this.state.CakeWork ? (
+      <WorkTile work={this.state.CakeWork} />
+    ) : (
+      <p>Loading</p>
+    );
   }
 }
 

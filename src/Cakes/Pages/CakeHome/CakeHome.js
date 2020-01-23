@@ -1,9 +1,5 @@
 import React from 'react';
-
-import SlideShowCakeImg1 from '../../../Assets/Cakes/SlideShow-img/slideshow-cake-img1.jpg';
-import SlideShowCakeImg2 from '../../../Assets/Cakes/SlideShow-img/slideshow-cake-img2.jpg';
-import SlideShowCakeImg3 from '../../../Assets/Cakes/SlideShow-img/slideshow-cake-img3.jpg';
-import SlideShowCakeImg4 from '../../../Assets/Cakes/SlideShow-img/slideshow-cake-img4.jpg';
+import axios from 'axios';
 
 import TileCakeImg1 from '../../../Assets/Cakes/HomeMenuBg/cake-tile1.jpg';
 import TileCakeImg2 from '../../../Assets/Cakes/HomeMenuBg/cake-tile2.jpg';
@@ -19,41 +15,23 @@ import './CakeHome.css';
 
 class CakeHome extends React.Component {
   state = {
-    CakeSlideShowImages: [
-      { id: 'CI1', image: SlideShowCakeImg1, show: true },
-      { id: 'CI2', image: SlideShowCakeImg2, show: false },
-      { id: 'CI3', image: SlideShowCakeImg3, show: false },
-      { id: 'CI4', image: SlideShowCakeImg4, show: false }
-    ],
+    CakeSlideShowImages: [],
     CakeMenuItems: [
       { id: 'ML1', text: 'About', image: TileCakeImg1 },
       { id: 'ML2', text: 'Work', image: TileCakeImg2 },
       { id: 'ML3', text: 'Services', image: TileCakeImg3 }
     ],
-    CakeTestimonials: [
-      {
-        id: 'CT1',
-        author: 'Person1',
-        text:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos',
-        show: true
-      },
-      {
-        id: 'CT2',
-        author: 'Person2',
-        text:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedita, quos',
-        show: false
-      },
-      {
-        id: 'CT3',
-        author: 'Person3',
-        text:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Expedit',
-        show: false
-      }
-    ]
+    CakeTestimonials: []
   };
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/cakehome').then(res => {
+      const state = this.state;
+      state.CakeSlideShowImages = res.data.CakeSlideShow;
+      state.CakeTestimonials = res.data.CakeTestimonials;
+      this.setState({ state });
+    });
+  }
 
   changeImageHandler = id => {
     const displayImage = this.state.CakeSlideShowImages.filter(
@@ -97,7 +75,10 @@ class CakeHome extends React.Component {
   };
 
   render() {
-    return (
+    return this.state.CakeSlideShowImages.length === 0 ||
+      this.state.CakeTestimonials.length === 0 ? (
+      <p>Loading</p>
+    ) : (
       <React.Fragment>
         <SlideShow
           imageChangeHandler={this.changeImageHandler}

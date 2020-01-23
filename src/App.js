@@ -16,7 +16,7 @@ import CakeWork from './Cakes/Pages/CakeWork/CakeWork';
 import BeautyServices from './Beauty/Pages/BeautyServices/BeautyServices';
 import CakeServices from './Cakes/Pages/CakeServices/CakeServices';
 import BeautyWorkDetail from './Beauty/Pages/BeautyWorkDetail/BeautyWorkDetail';
-// import CakeWorkDetail from './Cakes/Pages/CakeWorkDetail/CakeWorkDetail';
+import CakeWorkDetail from './Cakes/Pages/CakeWorkDetail/CakeWorkDetail';
 
 import Navigation from './Navigation/Navigation';
 
@@ -52,7 +52,7 @@ function App() {
           <CakeWork />
         </Route>
         <Route path="/beauty/work/:id" component={BeautyWorkDetail} />
-        {/* <Route path="/cake/work/:id" component={CakeWorkDetail} /> */}
+        <Route path="/cake/work/:id" component={CakeWorkDetail} />
         <Route path="/beauty/services">
           <Navigation />
           <BeautyServices />

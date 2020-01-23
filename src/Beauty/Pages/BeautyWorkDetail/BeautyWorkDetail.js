@@ -7,9 +7,7 @@ import Navigation from '../../../Navigation/Navigation';
 import './BeautyWorkDetail.css';
 
 class BeautyWorkDetail extends React.Component {
-  state = {
-    work: []
-  };
+  state = {};
 
   imageChangeHandler = id => {
     const displayItem = this.state.work.images.filter(item => id === item.id);
@@ -23,14 +21,11 @@ class BeautyWorkDetail extends React.Component {
     });
     const work = this.state.work;
     this.setState({ work });
-    // console.log(work);
   };
 
   componentDidMount() {
     axios
-      .get(
-        `https://my-json-server.typicode.com/amirrj/demo/BeautyWork/${this.props.match.params.id}`
-      )
+      .get(`http://localhost:5000/api/beautywork/${this.props.match.params.id}`)
       .then(res => {
         const work = res.data;
         this.setState({ work });
@@ -38,7 +33,7 @@ class BeautyWorkDetail extends React.Component {
   }
 
   render() {
-    return this.state.work.images ? (
+    return this.state.work ? (
       <React.Fragment>
         <Navigation />
         <SlideShow

@@ -10,17 +10,15 @@ import Text from '../../../Shared/UIElements/TextContainer/TextContainer';
 import './BeautyAbout.css';
 
 const BeautyAbout = props => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState();
   useEffect(() => {
-    axios
-      .get('https://my-json-server.typicode.com/amirrj/demo/BeautyAbout')
-      .then(res => {
-        const text = res.data.text;
-        setText(text);
-      });
+    axios.get('http://localhost:5000/api/beautyabout').then(res => {
+      const text = res.data.text;
+      setText(text);
+    });
   }, []);
 
-  return (
+  return text ? (
     <React.Fragment>
       <HeaderLogoWrapper darken img={HeaderImage}>
         <Logo type={'beauty'} />
@@ -29,6 +27,8 @@ const BeautyAbout = props => {
       <AboutTitle type={'beauty'} />
       <Text>{text}</Text>
     </React.Fragment>
+  ) : (
+    <p>Loading</p>
   );
 };
 

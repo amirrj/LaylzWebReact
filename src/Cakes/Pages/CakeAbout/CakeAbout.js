@@ -10,17 +10,15 @@ import Text from '../../../Shared/UIElements/TextContainer/TextContainer';
 import './CakeAbout.css';
 
 const CakeAbout = props => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState();
 
   useEffect(() => {
-    axios
-      .get('https://my-json-server.typicode.com/amirrj/demo/CakeAbout')
-      .then(res => {
-        const text = res.data.text;
-        setText(text);
-      });
+    axios.get('http://localhost:5000/api/cakeabout').then(res => {
+      const text = res.data.text;
+      setText(text);
+    });
   });
-  return (
+  return text ? (
     <React.Fragment>
       <HeaderLogoWrapper darken img={HeaderImage}>
         <Logo type={'cake'} />
@@ -29,6 +27,8 @@ const CakeAbout = props => {
       <AboutTitle type={'cake'} />
       <Text>{text}</Text>
     </React.Fragment>
+  ) : (
+    <p>Loading</p>
   );
 };
 

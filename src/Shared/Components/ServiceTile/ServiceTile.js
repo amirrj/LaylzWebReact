@@ -12,7 +12,7 @@ const ServiceTile = props => {
     };
 
     return (
-      <div onClick={openServiceHandler} key={item.id} className="serviceTile">
+      <div onClick={openServiceHandler} key={item._id} className="serviceTile">
         <div
           style={{
             background: `url(${item.img}) center center no-repeat`,
