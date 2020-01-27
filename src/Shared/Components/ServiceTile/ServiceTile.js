@@ -8,7 +8,7 @@ const ServiceTile = props => {
     const icon = item.open ? 'minus' : 'plus';
 
     const openServiceHandler = () => {
-      props.onClick(item.id);
+      props.onClick(item._id);
     };
 
     return (

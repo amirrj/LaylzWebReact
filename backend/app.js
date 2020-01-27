@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const HomeRoutes = require('./Routes/Home');
 const ServiceRoutes = require('./Routes/Service');
 const AboutRoutes = require('./Routes/About');
 const WorkRoutes = require('./Routes/Work.js');
@@ -20,11 +21,20 @@ mongoose
   .then(() => {
     console.log('connected to DB');
   })
-  .catch(() => {
-    console.log('connection failed');
+  .catch(err => {
+    console.log(err);
   });
 
 const apiRoute = '/api';
+
+// all data
+app.get(`${apiRoute}/api`);
+
+// Home Routes
+app.post(`${apiRoute}/beautyhome`, HomeRoutes.updateHome);
+app.get(`${apiRoute}/beautyhome`, HomeRoutes.getHome);
+app.post(`${apiRoute}/cakehome`, HomeRoutes.updateHome);
+app.get(`${apiRoute}/cakehome`, HomeRoutes.getHome);
 
 // About routes
 app.post(`${apiRoute}/beautyabout`, AboutRoutes.updateText);

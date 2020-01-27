@@ -20,7 +20,7 @@ class CakeServices extends React.Component {
   }
 
   openServiceHandler = id => {
-    const service = this.state.CakeServices.filter(item => id === item.id);
+    const service = this.state.CakeServices.filter(item => id === item._id);
     service['0'].open = !service['0'].open;
     const newServices = this.state.CakeServices;
     this.setState({

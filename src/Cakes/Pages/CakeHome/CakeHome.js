@@ -15,32 +15,34 @@ import './CakeHome.css';
 
 class CakeHome extends React.Component {
   state = {
-    CakeSlideShowImages: [],
     CakeMenuItems: [
       { id: 'ML1', text: 'About', image: TileCakeImg1 },
       { id: 'ML2', text: 'Work', image: TileCakeImg2 },
       { id: 'ML3', text: 'Services', image: TileCakeImg3 }
-    ],
-    CakeTestimonials: []
+    ]
   };
 
   componentDidMount() {
     axios.get('http://localhost:5000/api/cakehome').then(res => {
-      const state = this.state;
-      state.CakeSlideShowImages = res.data.CakeSlideShow;
-      state.CakeTestimonials = res.data.CakeTestimonials;
-      this.setState({ state });
+      const SlideShowImages = res.data[0].SlideShowImages;
+      const Testimonials = res.data[0].Testimonials;
+      SlideShowImages[0].show = true;
+      Testimonials[0].show = true;
+      this.setState({
+        CakeSlideShowImages: SlideShowImages,
+        CakeTestimonials: Testimonials
+      });
     });
   }
 
   changeImageHandler = id => {
     const displayImage = this.state.CakeSlideShowImages.filter(
-      image => id === image.id
+      image => id === image._id
     );
     displayImage[0].show = true;
 
     const notDisplayImage = this.state.CakeSlideShowImages.filter(
-      image => id !== image.id
+      image => id !== image._id
     );
 
     notDisplayImage.map(image => {
@@ -55,12 +57,12 @@ class CakeHome extends React.Component {
 
   changeActiveTestimonialHandler = id => {
     const displayItem = this.state.CakeTestimonials.filter(
-      item => item.id === id
+      item => item._id === id
     );
     displayItem[0].show = true;
 
     const notDisplayItem = this.state.CakeTestimonials.filter(
-      item => id !== item.id
+      item => id !== item._id
     );
     notDisplayItem.map(item => {
       item.show = false;
@@ -75,8 +77,7 @@ class CakeHome extends React.Component {
   };
 
   render() {
-    return this.state.CakeSlideShowImages.length === 0 ||
-      this.state.CakeTestimonials.length === 0 ? (
+    return !this.state.CakeSlideShowImages || !this.state.CakeTestimonials ? (
       <p>Loading</p>
     ) : (
       <React.Fragment>

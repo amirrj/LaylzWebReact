@@ -9,3 +9,11 @@
   overflow: hidden;
   /* transform: translateX(-100%); */
 }
+
+@media (min-width: 768px) {
+  .sidedraw {
+    height: 35vh;
+    display: flex;
+    padding: 0 5rem;
+  }
+}

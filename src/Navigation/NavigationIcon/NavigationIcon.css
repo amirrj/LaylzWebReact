@@ -75,3 +75,16 @@
     var(--primary-light)
   );
 }
+
+@media (min-width: 768px) {
+  .navigationIcon {
+    width: 5rem;
+  }
+  .navigationIcon::before {
+    width: 3rem;
+  }
+
+  .navigationIcon::after {
+    width: 4rem;
+  }
+}

@@ -19,7 +19,7 @@ class BeautyServices extends React.Component {
   }
 
   openServiceHandler = id => {
-    const service = this.state.BeautyServices.filter(item => id === item.id);
+    const service = this.state.BeautyServices.filter(item => id === item._id);
     service['0'].open = !service['0'].open;
     const newServices = this.state.BeautyServices;
     this.setState({

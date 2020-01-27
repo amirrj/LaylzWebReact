@@ -6,7 +6,7 @@ const Tesimonial = props => {
   const testimonial = props.displayItems.map(item => {
     if (item.show) {
       return (
-        <div key={item.id} className="testimonial__text">
+        <div key={item._id} className="testimonial__text">
           {item.text}
         </div>
       );

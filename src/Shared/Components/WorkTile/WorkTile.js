@@ -10,10 +10,10 @@ const WorkTile = props => {
       <HeaderLogoWrapper
         to={
           props.type === 'beauty'
-            ? `/beauty/work/${item.id}`
-            : `/cake/work/${item.id}`
+            ? `/beauty/work/${item._id}`
+            : `/cake/work/${item._id}`
         }
-        key={item.id}
+        key={item._id}
         className="work__content"
         darken
         img={item.thumbnail}

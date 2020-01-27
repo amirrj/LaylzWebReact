@@ -17,3 +17,12 @@
   -webkit-background-clip: text;
   -moz-background-clip: text;
 }
+
+@media (min-width: 768px) {
+  .navigationTitle {
+    border-bottom: none;
+    color: black;
+    text-align: center;
+    font-size: 1.7rem;
+  }
+}

@@ -13,7 +13,7 @@ const BeautyAbout = props => {
   const [text, setText] = useState();
   useEffect(() => {
     axios.get('http://localhost:5000/api/beautyabout').then(res => {
-      const text = res.data.text;
+      const text = res.data[0].text;
       setText(text);
     });
   }, []);

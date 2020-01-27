@@ -15,34 +15,34 @@ import './BeautyHome.css';
 
 class BeautyHome extends React.Component {
   state = {
-    BeautySlideShowImages: [],
     beautyMenuItems: [
       { id: 'ML1', text: 'About', image: tileBeautyImg1 },
       { id: 'ML2', text: 'Work', image: tileBeautyImg2 },
       { id: 'ML3', text: 'Services', image: tileBeautyImg3 }
-    ],
-    BeautyTestimonials: []
+    ]
   };
 
   componentDidMount() {
     axios.get('http://localhost:5000/api/beautyhome').then(res => {
-      const BeautySlideShowImages = res.data.BeautySlideShow;
-      const BeautyTestimonials = res.data.BeautyTestimonials;
+      const SlideShowImages = res.data[0].SlideShowImages;
+      const Testimonials = res.data[0].Testimonials;
+      SlideShowImages[0].show = true;
+      Testimonials[0].show = true;
       this.setState({
-        BeautySlideShowImages: BeautySlideShowImages,
-        BeautyTestimonials: BeautyTestimonials
+        BeautySlideShowImages: SlideShowImages,
+        BeautyTestimonials: Testimonials
       });
     });
   }
 
   changeActiveImage = id => {
     const displayImage = this.state.BeautySlideShowImages.filter(
-      image => id === image.id
+      image => id === image._id
     );
     displayImage[0].show = true;
 
     const notDisplayImage = this.state.BeautySlideShowImages.filter(
-      image => id !== image.id
+      image => id !== image._id
     );
     notDisplayImage.map(item => {
       item.show = false;
@@ -58,12 +58,12 @@ class BeautyHome extends React.Component {
 
   changeActiveTestimonial = id => {
     const displayItem = this.state.BeautyTestimonials.filter(
-      item => id === item.id
+      item => id === item._id
     );
     displayItem[0].show = true;
 
     const notdisplayItem = this.state.BeautyTestimonials.filter(
-      item => id !== item.id
+      item => id !== item._id
     );
     notdisplayItem.map(item => {
       item.show = false;
@@ -78,8 +78,8 @@ class BeautyHome extends React.Component {
   };
 
   render() {
-    return this.state.BeautySlideShowImages.length === 0 ||
-      this.state.BeautyTestimonials.length === 0 ? (
+    return !this.state.BeautySlideShowImages ||
+      !this.state.BeautyTestimonials ? (
       <p>Loading</p>
     ) : (
       <React.Fragment>

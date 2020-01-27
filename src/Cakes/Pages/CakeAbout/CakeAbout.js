@@ -14,7 +14,7 @@ const CakeAbout = props => {
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/cakeabout').then(res => {
-      const text = res.data.text;
+      const text = res.data[0].text;
       setText(text);
     });
   });

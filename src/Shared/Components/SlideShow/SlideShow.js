@@ -11,7 +11,7 @@ const SlideShow = props => {
       return (
         <HeaderLogoWrapper
           className={'slideShow__photos'}
-          key={images.id}
+          key={images._id}
           img={images.image}
         />
       );

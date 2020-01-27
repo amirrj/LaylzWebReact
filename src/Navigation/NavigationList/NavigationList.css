@@ -13,3 +13,16 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
+@media (min-width: 768px) {
+  .navigationList {
+    margin-left: 0;
+  }
+
+  .navigationListContainer {
+    width: 50%;
+    margin: 0;
+    top: 0rem;
+    justify-content: center;
+  }
+}

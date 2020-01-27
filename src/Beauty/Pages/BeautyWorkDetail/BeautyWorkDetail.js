@@ -10,10 +10,10 @@ class BeautyWorkDetail extends React.Component {
   state = {};
 
   imageChangeHandler = id => {
-    const displayItem = this.state.work.images.filter(item => id === item.id);
+    const displayItem = this.state.work.images.filter(item => id === item._id);
     displayItem[0].show = true;
     const notDisplayItem = this.state.work.images.filter(
-      item => id !== item.id
+      item => id !== item._id
     );
     notDisplayItem.map(item => {
       item.show = false;
@@ -28,6 +28,7 @@ class BeautyWorkDetail extends React.Component {
       .get(`http://localhost:5000/api/beautywork/${this.props.match.params.id}`)
       .then(res => {
         const work = res.data;
+        work.images[0].show = true;
         this.setState({ work });
       });
   }

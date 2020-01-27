@@ -10,10 +10,10 @@ class CakeWorkDetail extends React.Component {
   state = {};
 
   imageChangeHandler = id => {
-    const displayImage = this.state.work.images.filter(item => item.id === id);
+    const displayImage = this.state.work.images.filter(item => item._id === id);
     displayImage[0].show = true;
     const notDisplayItem = this.state.work.images.filter(
-      item => item.id !== id
+      item => item._id !== id
     );
     notDisplayItem.map(item => {
       item.show = false;
@@ -28,6 +28,7 @@ class CakeWorkDetail extends React.Component {
       .get(`http://localhost:5000/api/cakework/${this.props.match.params.id}`)
       .then(res => {
         const work = res.data;
+        work.images[0].show = true;
         this.setState({ work });
       });
   }
