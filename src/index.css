@@ -38,3 +38,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.slide-in-enter {
+  transform: translateX(-100%);
+}
+.slide-in-enter-active {
+  transform: translateX(0);
+  transition: all 0.5s;
+}
+.slide-in-exit {
+  transform: translateX(0);
+}
+.slide-in-exit-active {
+  transform: translateX(-100%);
+  transition: all 0.5s;
+}
+
+@media (min-width: 768px) {
+  .slide-in-enter {
+    transform: translateY(-100%);
+  }
+  .slide-in-enter-active {
+    transform: translateY(0);
+  }
+  .slide-in-exit {
+    transform: translateY(0);
+  }
+  .slide-in-exit-active {
+    transform: translateY(-100%);
+  }
+}

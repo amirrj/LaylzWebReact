@@ -15,12 +15,10 @@ const Navigation = props => {
   return (
     <React.Fragment>
       <NavigationIcon open={sideDrawerOpen} onClick={sideDrawerOpenHandler} />
-      {sideDrawerOpen ? (
-        <Sidedraw>
-          <NavigationList onClick={sideDrawerOpenHandler} type={'beauty'} />
-          <NavigationList onClick={sideDrawerOpenHandler} type={'cake'} />
-        </Sidedraw>
-      ) : null}
+      <Sidedraw show={sideDrawerOpen}>
+        <NavigationList onClick={sideDrawerOpenHandler} type={'beauty'} />
+        <NavigationList onClick={sideDrawerOpenHandler} type={'cake'} />
+      </Sidedraw>
     </React.Fragment>
   );
 };

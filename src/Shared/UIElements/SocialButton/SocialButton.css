@@ -1,13 +1,54 @@
+.social__tiles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3rem 0;
+}
+
 .social__tile {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  height: 150px;
-  flex: 0 0 43%;
-  background-image: linear-gradient(
-    to bottom,
-    var(--primary-light),
-    var(--primary-dark)
+  border-radius: 200px;
+  padding: 1.5rem;
+  background-color: #fff;
+  width: 7rem;
+  height: 7rem;
+}
+
+.social__tile-border {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    to right,
+    var(--primary-dark),
+    var(--primary-light)
   );
+  border-radius: 200px;
+  width: 8rem;
+  height: 8rem;
+}
+
+.social__tile-icon {
+  fill: var(--primary-dark);
+}
+
+@media (min-width: 768px) {
+  .social__tiles {
+    justify-content: center;
+  }
+
+  .social__tile {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .social__tile-border {
+    width: 10rem;
+    height: 10rem;
+    margin: 0 3rem;
+  }
 }

@@ -35,7 +35,7 @@ const Tiles = props => {
     );
   });
 
-  return <React.Fragment>{menuItem}</React.Fragment>;
+  return <div className="tile__container">{menuItem}</div>;
 };
 
 export default Tiles;

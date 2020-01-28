@@ -4,6 +4,9 @@ import axios from 'axios';
 import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import HeaderImage from '../../../Assets/Beauty/Services/beautyServices-header.jpg';
 import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
+
+import Logo from '../../../Shared/Components/Logo/Logo';
+import Title from '../../../Shared/Components/Title/Title';
 import './BeautyServices.css';
 
 class BeautyServices extends React.Component {
@@ -31,9 +34,9 @@ class BeautyServices extends React.Component {
     return this.state.BeautyServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImage}>
-          <h1 className="services__title">
-            What Can <br></br> I Do For <br></br> You<br></br>?
-          </h1>
+          <Logo type={'beauty'} />
+          <Title type={'beauty'} />
+          <h1 className="title">Services</h1>
         </HeaderLogoWrapper>
         <ServiceTile
           onClick={this.openServiceHandler}

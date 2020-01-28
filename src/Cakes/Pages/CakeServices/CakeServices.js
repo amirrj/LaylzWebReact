@@ -5,6 +5,9 @@ import HeaderImg from '../../../Assets/Cakes/CakeServices/cakeservices-header.jp
 
 import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
+
+import Logo from '../../../Shared/Components/Logo/Logo';
+import Title from '../../../Shared/Components/Title/Title';
 import './CakeServices.css';
 
 class CakeServices extends React.Component {
@@ -32,9 +35,9 @@ class CakeServices extends React.Component {
     return this.state.CakeServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImg}>
-          <h1 className="services__title">
-            What Can <br></br> I Do For <br></br> You<br></br>?
-          </h1>
+          <Logo type={'cake'} />
+          <Title type={'cake'} />
+          <h1 className="title">Services</h1>
         </HeaderLogoWrapper>
         <ServiceTile
           onClick={this.openServiceHandler}

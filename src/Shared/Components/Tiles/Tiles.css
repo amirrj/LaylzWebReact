@@ -22,7 +22,7 @@
   padding: 2rem;
   border: 0.7rem solid #fff;
   height: 110px;
-  width: 80%;
+  /* width: auto; */
   z-index: 10;
 
   display: flex;
@@ -40,4 +40,40 @@
 
 .tile__text-shrink {
   font-size: 5rem;
+}
+
+@media (min-width: 768px) {
+  .tile {
+    /* width: 45%; */
+    height: 220px;
+    flex-grow: 1;
+    margin: 1rem 1rem;
+  }
+  .tile__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .tile__text-box {
+    border: none;
+    background-color: #fff;
+    width: auto;
+  }
+
+  .tile__text {
+    color: transparent;
+    background: linear-gradient(
+      to right,
+      var(--primary-dark),
+      var(--primary-light)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+  }
+
+  .tile__text-shrink {
+    font-size: 7rem;
+  }
 }
