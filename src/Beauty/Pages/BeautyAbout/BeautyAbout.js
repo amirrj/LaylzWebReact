@@ -3,8 +3,7 @@ import axios from 'axios';
 
 import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import HeaderImage from '../../../Assets/Beauty/beautyAbout-header.jpg';
-import Logo from '../../../Shared/Components/Logo/Logo';
-import Title from '../../../Shared/Components/Title/Title';
+import LogoAndTitle from '../../../Shared/UIElements/LogoAndTitle/LogoAndTitle';
 import AboutTitle from '../../../Shared/Components/AboutTitle/AboutTitle';
 import Text from '../../../Shared/UIElements/TextContainer/TextContainer';
 import './BeautyAbout.css';
@@ -21,8 +20,7 @@ const BeautyAbout = props => {
   return text ? (
     <React.Fragment>
       <HeaderLogoWrapper darken img={HeaderImage}>
-        <Logo type={'beauty'} />
-        <Title type={'beauty'} />
+        <LogoAndTitle type={'beauty'} />
       </HeaderLogoWrapper>
       <AboutTitle type={'beauty'} />
       <Text>{text}</Text>

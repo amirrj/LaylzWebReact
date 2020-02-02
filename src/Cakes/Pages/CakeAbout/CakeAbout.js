@@ -3,8 +3,7 @@ import axios from 'axios';
 
 import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import HeaderImage from '../../../Assets/Cakes/cakeAbout-img.jpg';
-import Logo from '../../../Shared/Components/Logo/Logo';
-import Title from '../../../Shared/Components/Title/Title';
+import LogoAndTitle from '../../../Shared/UIElements/LogoAndTitle/LogoAndTitle';
 import AboutTitle from '../../../Shared/Components/AboutTitle/AboutTitle';
 import Text from '../../../Shared/UIElements/TextContainer/TextContainer';
 import './CakeAbout.css';
@@ -20,9 +19,8 @@ const CakeAbout = props => {
   });
   return text ? (
     <React.Fragment>
-      <HeaderLogoWrapper darken img={HeaderImage}>
-        <Logo type={'cake'} />
-        <Title type={'cake'} />
+      <HeaderLogoWrapper img={HeaderImage}>
+        <LogoAndTitle type={'cake'} />
       </HeaderLogoWrapper>
       <AboutTitle type={'cake'} />
       <Text>{text}</Text>

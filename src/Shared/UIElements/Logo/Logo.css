@@ -1,0 +1,10 @@
+.Logo {
+  width: 8rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .Logo {
+    width: 12rem;
+  }
+}

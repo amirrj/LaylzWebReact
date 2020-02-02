@@ -5,8 +5,7 @@ import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/Head
 import HeaderImage from '../../../Assets/Beauty/Services/beautyServices-header.jpg';
 import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
 
-import Logo from '../../../Shared/Components/Logo/Logo';
-import Title from '../../../Shared/Components/Title/Title';
+import LogoAndTitle from '../../../Shared/UIElements/LogoAndTitle/LogoAndTitle';
 import './BeautyServices.css';
 
 class BeautyServices extends React.Component {
@@ -34,9 +33,7 @@ class BeautyServices extends React.Component {
     return this.state.BeautyServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImage}>
-          <Logo type={'beauty'} />
-          <Title type={'beauty'} />
-          <h1 className="title">Services</h1>
+          <LogoAndTitle type={'beauty'} title={'services'} text={'scroll down to see some of the services i provide'}/>
         </HeaderLogoWrapper>
         <ServiceTile
           onClick={this.openServiceHandler}

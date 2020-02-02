@@ -10,22 +10,19 @@ const HeaderLogoWrapper = props => {
     <React.Fragment>{props.children}</React.Fragment>
   );
 
-  if (props.to) {
-    return (
-      <Link
-        to={props.to}
-        className={`HeaderLogoWrapper ${props.className} `}
-        img={props.img}
-        style={{
-          background: `url(${props.img}) center center no-repeat`,
-          backgroundSize: 'cover'
-        }}
-      >
-        {inner}
-      </Link>
-    );
-  }
-  return (
+  const Header = props.to ? (
+    <Link
+      to={props.to}
+      className={`HeaderLogoWrapper ${props.className} `}
+      img={props.img}
+      style={{
+        background: `url(${props.img}) center center no-repeat`,
+        backgroundSize: 'cover'
+      }}
+    >
+      {inner}
+    </Link>
+  ) : (
     <div
       className={`HeaderLogoWrapper ${props.className}`}
       img={props.img}
@@ -37,6 +34,8 @@ const HeaderLogoWrapper = props => {
       {inner}
     </div>
   );
+
+  return Header;
 };
 
 export default HeaderLogoWrapper;

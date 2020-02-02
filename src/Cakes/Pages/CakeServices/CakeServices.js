@@ -6,8 +6,7 @@ import HeaderImg from '../../../Assets/Cakes/CakeServices/cakeservices-header.jp
 import HeaderLogoWrapper from '../../../Shared/UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import ServiceTile from '../../../Shared/Components/ServiceTile/ServiceTile';
 
-import Logo from '../../../Shared/Components/Logo/Logo';
-import Title from '../../../Shared/Components/Title/Title';
+import LogoAndTitle from '../../../Shared/UIElements/LogoAndTitle/LogoAndTitle';
 import './CakeServices.css';
 
 class CakeServices extends React.Component {
@@ -35,9 +34,11 @@ class CakeServices extends React.Component {
     return this.state.CakeServices ? (
       <React.Fragment>
         <HeaderLogoWrapper darken img={HeaderImg}>
-          <Logo type={'cake'} />
-          <Title type={'cake'} />
-          <h1 className="title">Services</h1>
+          <LogoAndTitle
+            type={'cake'}
+            title={'Services'}
+            text={'What can i do for you?'}
+          />
         </HeaderLogoWrapper>
         <ServiceTile
           onClick={this.openServiceHandler}

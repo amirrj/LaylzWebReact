@@ -1,10 +1,14 @@
 import React from 'react';
+import {
+  Mobile,
+  Default
+} from '../../UIElements/MediaBreakPoints/MediaBreakPoints';
 
 import Sprite from '../../../Assets/Shared/sprite.svg';
 import './ServiceTile.css';
 
 const ServiceTile = props => {
-  const services = props.services.map(item => {
+  const MobileServices = props.services.map(item => {
     const icon = item.open ? 'minus' : 'plus';
 
     const openServiceHandler = () => {
@@ -40,7 +44,31 @@ const ServiceTile = props => {
     );
   });
 
-  return services;
+  const services = props.services.map(service => {
+    return (
+      <div key={service._id} className="tablet__service__tile">
+        <img
+          className="tablet__service__tile-image"
+          src={service.img}
+          alt="laylz services"
+        />
+        <div className="tablet__service__tile-innerbox">
+          <h2 className="tablet__service__tile-title">{service.service}</h2>
+          <p className="tablet__service__tile-text">{service.detail}</p>
+          <p className="tablet__service__tile-price">
+            £ {service.price.toFixed(2)}
+          </p>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <React.Fragment>
+      <Mobile>{MobileServices}</Mobile>
+      <Default>{services}</Default>
+    </React.Fragment>
+  );
 };
 
 export default ServiceTile;

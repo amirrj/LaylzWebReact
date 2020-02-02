@@ -3,21 +3,26 @@ import React from 'react';
 import HeaderLogoWrapper from '../../UIElements/HeaderLogoWrapper/HeaderLogoWrapper';
 import BeautyHeader from '../../../Assets/Beauty/lipstick-edit.jpg';
 import CakeHeader from '../../../Assets/Cakes/bakinghome-edit.jpg';
-import Logo from '../../Components/Logo/Logo';
-import Title from '../../../Shared/Components/Title/Title';
+import LogoAndTitle from '../../UIElements/LogoAndTitle/LogoAndTitle';
 import './StarterMenu.css';
 
 const StarterMenu = props => {
   return (
     <React.Fragment>
-      <HeaderLogoWrapper to={'/Beauty/Home'} img={BeautyHeader}>
-        <Logo type={'beauty'} />
-        <Title type={'beauty'} />
+      <HeaderLogoWrapper
+        className={'starterMenu__header'}
+        to={'/Beauty/Home'}
+        img={BeautyHeader}
+      >
+        <LogoAndTitle type={'beauty'} />
       </HeaderLogoWrapper>
       <div className="header-border"></div>
-      <HeaderLogoWrapper to={'/Cake/Home'} img={CakeHeader}>
-        <Logo type={'cake'} />
-        <Title type={'cake'} />
+      <HeaderLogoWrapper
+        className={'starterMenu__header'}
+        to={'/Cake/Home'}
+        img={CakeHeader}
+      >
+        <LogoAndTitle type={'cake'} />
       </HeaderLogoWrapper>
     </React.Fragment>
   );

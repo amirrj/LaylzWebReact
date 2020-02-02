@@ -25,3 +25,9 @@
 .slideShow__button:not(:last-child) {
   margin-right: 1.5rem;
 }
+
+@media (min-width: 768px) {
+  .slideShow {
+    height: 40vh;
+  }
+}

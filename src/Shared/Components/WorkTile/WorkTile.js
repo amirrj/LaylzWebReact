@@ -8,6 +8,7 @@ const WorkTile = props => {
   const tile = props.work.map(item => {
     return (
       <HeaderLogoWrapper
+        darken
         to={
           props.type === 'beauty'
             ? `/beauty/work/${item._id}`
@@ -15,7 +16,6 @@ const WorkTile = props => {
         }
         key={item._id}
         className="work__content"
-        darken
         img={item.thumbnail}
       >
         <h3 className="work__title">{item.title}</h3>

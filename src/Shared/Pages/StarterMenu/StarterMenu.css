@@ -7,3 +7,7 @@
     rgba(204, 0, 164, 1) 55%
   );
 }
+
+.starterMenu__header {
+  height: 49.75vh;
+}

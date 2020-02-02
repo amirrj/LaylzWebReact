@@ -1,0 +1,21 @@
+.logoTitle__title {
+  font-family: var(--heading-primary);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.logoTitle__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .logoTitle__title {
+    font-size: 1.9rem;
+  }
+}
