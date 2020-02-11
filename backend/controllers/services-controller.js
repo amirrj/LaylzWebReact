@@ -1,6 +1,8 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 
+const { beautyServices, cakeServices } = require('../models/service-model');
+
 const DUMMY_DATA = [
   {
     BeautyServices: [
@@ -28,20 +30,16 @@ const DUMMY_DATA = [
   }
 ];
 
-const getData = (req, res, next) => {
+const getData = async (req, res, next) => {
   const path =
-    req.route.path === '/beautyservices' ? 'BeautyServices' : 'CakeServices';
+    req.route.path === '/beautyservices' ? beautyServices : cakeServices;
 
-  const data = DUMMY_DATA[0][path];
-
-  if (!data) {
-    return next(new HttpError('Data Not Found', 404));
-  }
+  const data = await path.find().exec();
 
   res.json(data);
 };
 
-const createService = (req, res, next) => {
+const createService = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -49,25 +47,24 @@ const createService = (req, res, next) => {
     );
   }
   const path =
-    req.route.path === '/beautyservices' ? 'BeautyServices' : 'CakeServices';
+    req.route.path === '/beautyservices' ? beautyServices : cakeServices;
 
-  const { id, service, img, detail, price, open } = req.body;
+  const { service, img, detail, price, open } = req.body;
 
-  const newService = {
-    id,
+  const newService = new path({
     service,
     img,
     detail,
     price,
     open
-  };
+  });
 
-  DUMMY_DATA[0][path].push(newService);
+  await newService.save();
 
   res.status(201).json({ Message: 'Service Created' });
 };
 
-const updateService = (req, res, next) => {
+const updateService = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -75,42 +72,66 @@ const updateService = (req, res, next) => {
     );
   }
   const path =
-    req.route.path === '/beautyservices/:id'
-      ? 'BeautyServices'
-      : 'CakeServices';
+    req.route.path === '/beautyservices/:id' ? beautyServices : cakeServices;
 
   const id = req.params.id;
   const { service, img, detail, price } = req.body;
+  let updatedService;
 
-  const updatedService = { ...DUMMY_DATA[0][path].find(s => s.id === id) };
-  const serviceIndex = DUMMY_DATA[0][path].findIndex(s => s.id === id);
+  try {
+    updatedService = await path.findById(id);
+  } catch (err) {
+    const error = new HttpError(
+      'Could not update service, please check and try again',
+      500
+    );
+    return next(error);
+  }
+
   updatedService.service = service;
   updatedService.img = img;
   updatedService.detail = detail;
   updatedService.price = price;
 
-  DUMMY_DATA[0][path][serviceIndex] = updatedService;
+  try {
+    updatedService.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not update service, please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'Service Updated' });
 };
 
-const deleteService = (req, res, next) => {
+const deleteService = async (req, res, next) => {
   const path =
-    req.route.path === '/beautyservices/:id'
-      ? 'BeautyServices'
-      : 'CakeServices';
+    req.route.path === '/beautyservices/:id' ? beautyServices : cakeServices;
 
   const id = req.params.id;
 
-  if (!DUMMY_DATA[0][path].find(s => s.id === id)) {
-    return next(
-      new HttpError(
-        'Could not find service with that id, please check and try again'
-      )
+  let service;
+
+  try {
+    service = await path.findById(id);
+  } catch (err) {
+    const error = new HttpError(
+      'Could not delete service, please check and try again',
+      500
     );
+    return next(error);
   }
 
-  DUMMY_DATA[0][path] = DUMMY_DATA[0][path].filter(s => s.id !== id);
+  try {
+    await service.remove();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not delete service, please check and try again'
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'service deleted' });
 };

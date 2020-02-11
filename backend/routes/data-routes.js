@@ -1,6 +1,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 
+const dbController = require('../controllers/fullDataBase-controller');
 const homeController = require('../controllers/home-controller');
 const serviceController = require('../controllers/services-controller');
 const aboutController = require('../controllers/about-controller');
@@ -8,8 +9,11 @@ const workController = require('../controllers/work-controller');
 
 const router = express.Router();
 
+router.get('/', dbController.getData);
+
 // beauty home routes
 router.get('/beautyhome', homeController.getData);
+router.post('/beautyhome', homeController.createHome);
 router.post(
   '/beautyhome/slideshow',
   [
@@ -36,6 +40,7 @@ router.delete('/beautyhome/testimonial/:id', homeController.deleteTestimonial);
 
 // cake home routes
 router.get('/cakehome', homeController.getData);
+router.post('/cakehome', homeController.createHome);
 router.post(
   '/cakehome/slideshow',
   [
@@ -62,6 +67,7 @@ router.delete('/cakehome/testimonial/:id', homeController.deleteTestimonial);
 
 //beauty about
 router.get('/beautyabout', aboutController.getData);
+router.post('/beautyabout', aboutController.createAbout);
 router.patch(
   '/beautyabout',
   [
@@ -74,6 +80,7 @@ router.patch(
 
 //cake about
 router.get('/cakeabout', aboutController.getData);
+router.post('/cakeabout', aboutController.createAbout);
 router.patch(
   '/cakeabout',
   [
@@ -215,16 +222,6 @@ router.patch(
   ],
   workController.updateWork
 );
-router.post(
-  '/beautywork/images/:wid',
-  [
-    check('image')
-      .not()
-      .isEmpty()
-  ],
-  workController.addImage
-);
-router.delete('/beautywork/images/:wid/:iid', workController.deleteImage);
 
 //cakework
 router.get('/cakework', workController.getData);
@@ -277,15 +274,5 @@ router.patch(
   ],
   workController.updateWork
 );
-router.post(
-  '/cakework/images/:wid',
-  [
-    check('image')
-      .not()
-      .isEmpty()
-  ],
-  workController.addImage
-);
-router.delete('/cakework/images/:wid/:iid', workController.deleteImage);
 
 module.exports = router;

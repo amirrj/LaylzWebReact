@@ -1,6 +1,8 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 
+const { beautyWork, cakeWork } = require('../models/work-model');
+
 const DUMMY_DATA = [
   {
     BeautyWork: [
@@ -74,14 +76,10 @@ const DUMMY_DATA = [
   }
 ];
 
-const getData = (req, res, next) => {
-  const path = req.route.path === '/beautywork' ? 'BeautyWork' : 'CakeWork';
+const getData = async (req, res, next) => {
+  const path = req.route.path === '/beautywork' ? beautyWork : cakeWork;
 
-  const data = DUMMY_DATA[0][path];
-
-  if (!data) {
-    return next(new HttpError('Data Not Found', 404));
-  }
+  const data = await path.find();
 
   res.status(200).json(data);
 };
@@ -91,124 +89,104 @@ const addWork = (req, res, next) => {
   if (!error.isEmpty()) {
     return next(new HttpError('Please check data and try again', 422));
   }
-  const path = req.route.path === '/beautywork' ? 'BeautyWork' : 'CakeWork';
+  const path = req.route.path === '/beautywork' ? beautyWork : cakeWork;
 
-  const { id, title, text, description, date, thumbnail, images } = req.body;
+  const { title, text, description, date, thumbnail, images } = req.body;
 
-  const createdWork = {
-    id,
+  const createdWork = new path({
     title,
     text,
     description,
     date,
     thumbnail,
     images
-  };
+  });
 
-  DUMMY_DATA[0][path].push(createdWork);
-  res.status(201).json(createdWork);
+  try {
+    createdWork.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save data please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  res.status(201).json({ Message: 'Work added' });
 };
 
-const deleteWork = (req, res, next) => {
-  const path = req.route.path === '/beautywork/:id' ? 'BeautyWork' : 'CakeWork';
+const deleteWork = async (req, res, next) => {
+  const path = req.route.path === '/beautywork/:id' ? beautyWork : cakeWork;
 
   const id = req.params.id;
-  const newWork = DUMMY_DATA[0][path].filter(w => w.id !== id);
 
-  DUMMY_DATA[0][path] = newWork;
+  let data;
+
+  try {
+    data = await path.findById(id);
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  try {
+    data.remove();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not delete data, please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'work deleted' });
 };
 
-const updateWork = (req, res, next) => {
+const updateWork = async (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return next(new HttpError('Please check data and try again', 422));
   }
-  const path = req.route.path === '/beautywork/:id' ? 'BeautyWork' : 'CakeWork';
+  const path = req.route.path === '/beautywork/:id' ? beautyWork : cakeWork;
 
-  const { title, text, description, date, thumbnail } = req.body;
+  const { title, text, description, date, thumbnail, images } = req.body;
   const id = req.params.id;
+  let data;
 
-  const updatedWork = { ...DUMMY_DATA[0][path].find(w => w.id === id) };
-
-  if (
-    Object.entries(updatedWork).length === 0 &&
-    updatedWork.constructor === Object
-  ) {
-    return next(new HttpError('Could Not Find Any Work With That ID', 404));
+  try {
+    data = await path.findById(id);
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find any data, please check and try again',
+      404
+    );
+    return next(error);
   }
 
-  updatedWork.title = title;
-  updatedWork.text = text;
-  updatedWork.description = description;
-  updatedWork.date = date;
-  updatedWork.thumbnail = thumbnail;
+  data.title = title;
+  data.text = text;
+  data.description = description;
+  data.date = date;
+  data.thumbnail = thumbnail;
+  data.images = images;
 
-  const workIndex = DUMMY_DATA[0][path].findIndex(w => w.id === id);
-
-  DUMMY_DATA[0][path][workIndex] = updatedWork;
+  try {
+    data.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save data, please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'Work Updated' });
-};
-
-const addImage = (req, res, next) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new HttpError('Please check data and try again', 422));
-  }
-  const path =
-    req.route.path === '/beautywork/images/:wid' ? 'BeautyWork' : 'CakeWork';
-
-  const { id, image, show } = req.body;
-  const newImage = {
-    id,
-    image,
-    show
-  };
-
-  const workID = req.params.wid;
-
-  const workIndex = DUMMY_DATA[0][path].findIndex(w => w.id === workID);
-
-  if (workIndex === -1) {
-    return next(new HttpError('Could not find any work with that id', 404));
-  }
-
-  DUMMY_DATA[0][path][workIndex].images.push(newImage);
-
-  res.status(201).json({ Message: 'Image Added' });
-};
-
-const deleteImage = (req, res, next) => {
-  const path =
-    req.route.path === '/beautywork/images/:wid/:iid'
-      ? 'BeautyWork'
-      : 'CakeWork';
-
-  const workID = req.params.wid;
-  const imageID = req.params.iid;
-
-  const workIndex = DUMMY_DATA[0][path].findIndex(w => w.id === workID);
-
-  if (workIndex === -1) {
-    return next(new HttpError('Could not find any data with that id'));
-  }
-
-  const newImages = DUMMY_DATA[0][path][workIndex].images.filter(
-    i => i.id !== imageID
-  );
-
-  console.log(newImages);
-
-  DUMMY_DATA[0][path][workIndex].images = newImages;
-
-  res.status(200).json({ Message: 'Image Deleted' });
 };
 
 exports.getData = getData;
 exports.addWork = addWork;
 exports.deleteWork = deleteWork;
 exports.updateWork = updateWork;
-exports.addImage = addImage;
-exports.deleteImage = deleteImage;

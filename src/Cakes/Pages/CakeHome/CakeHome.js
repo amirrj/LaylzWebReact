@@ -22,8 +22,8 @@ class CakeHome extends React.Component {
 
   componentDidMount() {
     axios.get('http://localhost:5000/api/cakehome').then(res => {
-      const SlideShowImages = res.data[0].SlideShowImages;
-      const Testimonials = res.data[0].Testimonials;
+      const SlideShowImages = res.data[0].slideShowImages;
+      const Testimonials = res.data[0].testimonials;
       SlideShowImages[0].show = true;
       Testimonials[0].show = true;
       this.setState({

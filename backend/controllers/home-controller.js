@@ -1,6 +1,8 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 
+const { beautyHome, cakeHome } = require('../models/home-model');
+
 const DUMMY_DATA = [
   {
     BeautyHome: {
@@ -98,44 +100,30 @@ const DUMMY_DATA = [
   }
 ];
 
-const getData = (req, res, next) => {
-  const path = req.route.path === '/beautyhome' ? 'BeautyHome' : 'CakeHome';
-  const data = DUMMY_DATA[0][path];
+const getData = async (req, res, next) => {
+  const path = req.route.path === '/beautyhome' ? beautyHome : cakeHome;
 
-  if (!data) {
-    return next(new HttpError('Data Not Found', 404));
-  }
+  const data = await path.find().exec();
 
   res.json(data);
 };
 
-const addImage = (req, res, next) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(
-      new HttpError(
-        'Incorrect data fields entered, please check and try again'
-      ),
-      422
-    );
-  }
-  const path =
-    req.route.path === '/beautyhome/slideshow' ? 'BeautyHome' : 'CakeHome';
+const createHome = async (req, res, next) => {
+  const path = req.route.path === '/beautyhome' ? beautyHome : cakeHome;
 
-  const { id, image, show } = req.body;
+  const { slideShowImages, testimonials } = req.body;
 
-  const newImage = {
-    id,
-    image,
-    show
-  };
+  const createdHome = new path({
+    slideShowImages,
+    testimonials
+  });
 
-  DUMMY_DATA[0][path].SlideShowImages.push(newImage);
+  await createdHome.save();
 
-  res.json(newImage);
+  res.status(201).json({ Message: 'Home created' });
 };
 
-const addTestimonial = (req, res, next) => {
+const addImage = async (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return next(
@@ -146,50 +134,176 @@ const addTestimonial = (req, res, next) => {
     );
   }
   const path =
-    req.route.path === '/beautyhome/testimonial' ? 'BeautyHome' : 'CakeHome';
+    req.route.path === '/beautyhome/slideshow' ? beautyHome : cakeHome;
 
-  const { id, author, text, show } = req.body;
+  const { image, show } = req.body;
+  let data;
 
-  const newTestimonial = {
-    id,
+  try {
+    data = await path.findOne();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const slideShowImages = [...data.slideShowImages];
+  const newImage = data.slideShowImages.create({
+    image,
+    show
+  });
+  slideShowImages.push(newImage);
+  data.slideShowImages = slideShowImages;
+
+  try {
+    data.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save data, please check and try again',
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ Message: 'Image Updated' });
+};
+
+const addTestimonial = async (req, res, next) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return next(
+      new HttpError(
+        'Incorrect data fields entered, please check and try again'
+      ),
+      422
+    );
+  }
+  const path =
+    req.route.path === '/beautyhome/testimonial' ? beautyHome : cakeHome;
+
+  const { author, text, show } = req.body;
+  let data;
+
+  try {
+    data = await path.findOne();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const newTestimonial = data.testimonials.create({
     author,
     text,
     show
-  };
+  });
+  const newTestimonials = [...data.testimonials];
+  newTestimonials.push(newTestimonial);
+  data.testimonials = newTestimonials;
 
-  DUMMY_DATA[0][path].Testimonials.push(newTestimonial);
+  try {
+    data.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save data, please check and try again',
+      500
+    );
+    return error;
+  }
 
-  res.status(200).json(newTestimonial);
+  res.status(200).json({ Message: 'New testimonial added' });
 };
 
-const deleteImage = (req, res, next) => {
+const deleteImage = async (req, res, next) => {
   const path =
-    req.route.path === '/beautyhome/slideshow/:id' ? 'BeautyHome' : 'CakeHome';
+    req.route.path === '/beautyhome/slideshow/:id' ? beautyHome : cakeHome;
 
   const id = req.params.id;
+  let data;
 
-  DUMMY_DATA[0][path].SlideShowImages = DUMMY_DATA[0][
-    path
-  ].SlideShowImages.filter(i => id !== i.id);
+  try {
+    data = await path.findOne();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const imageID = data.slideShowImages.find(i => i.id === id);
+  if (!imageID) {
+    const error = new HttpError(
+      'Could not find data with that ID, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const updatedSlideShowImages = data.slideShowImages.filter(i => i.id !== id);
+  data.slideShowImages = updatedSlideShowImages;
+
+  try {
+    data.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not delete data, please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'Item Deleted' });
 };
 
-const deleteTestimonial = (req, res, next) => {
+const deleteTestimonial = async (req, res, next) => {
   const path =
-    req.route.path === '/beautyhome/testimonial/:id'
-      ? 'BeautyHome'
-      : 'CakeHome';
+    req.route.path === '/beautyhome/testimonial/:id' ? beautyHome : cakeHome;
 
   const id = req.params.id;
-  DUMMY_DATA[0][path].Testimonials = DUMMY_DATA[0][path].Testimonials.filter(
-    i => id !== i.id
-  );
+  let data;
+
+  try {
+    data = await path.findOne();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const testimonialID = data.testimonials.find(t => t.id === id);
+  if (!testimonialID) {
+    const error = new HttpError(
+      'Could not find data with that ID, please check and try again',
+      404
+    );
+    return next(error);
+  }
+
+  const newTestimonials = data.testimonials.filter(t => t.id !== id);
+  data.testimonials = newTestimonials;
+
+  try {
+    data.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save data, please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json({ Message: 'Item Deleted' });
 };
 
 exports.getData = getData;
+exports.createHome = createHome;
 exports.addImage = addImage;
 exports.addTestimonial = addTestimonial;
 exports.deleteImage = deleteImage;

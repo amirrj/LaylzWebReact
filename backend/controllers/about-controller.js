@@ -1,6 +1,8 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 
+const { beautyAbout, cakeAbout } = require('../models/about-model');
+
 const DUMMY_DATA = [
   {
     BeautyAbout: {
@@ -16,29 +18,71 @@ const DUMMY_DATA = [
   }
 ];
 
-const getData = (req, res, next) => {
-  const path = req.route.path === '/beautyabout' ? 'BeautyAbout' : 'CakeAbout';
+const getData = async (req, res, next) => {
+  const path = req.route.path === '/beautyabout' ? beautyAbout : cakeAbout;
 
-  const data = DUMMY_DATA[0][path];
+  let data;
+
+  try {
+    data = await path.find().exec();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, Please check and try again',
+      500
+    );
+    return next(error);
+  }
 
   res.status(200).json(data);
 };
 
-const updateAbout = (req, res, next) => {
+const createAbout = async (req, res, next) => {
+  const path = req.route.path === '/beautyabout' ? beautyAbout : cakeAbout;
+
+  const { text } = req.body;
+
+  const createdAbout = new path({
+    text
+  });
+
+  await createdAbout.save();
+
+  res.status(201).json({ Message: 'About Created' });
+};
+
+const updateAbout = async (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return next(new HttpError('Please check input data and try again'));
   }
-  const path = req.route.path === '/beautyabout' ? 'BeautyAbout' : 'CakeAbout';
+  const path = req.route.path === '/beautyabout' ? beautyAbout : cakeAbout;
 
+  let updatedAbout;
   const { text } = req.body;
-  const updatedAbout = { ...DUMMY_DATA[0][path] };
+
+  try {
+    updatedAbout = await path.findOne();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not find data, please check and try again',
+      404
+    );
+  }
+
   updatedAbout.text = text;
 
-  DUMMY_DATA[0][path] = updatedAbout;
+  try {
+    await updatedAbout.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Could not save new updates to database, please check and try again',
+      500
+    );
+  }
 
   res.status(200).json({ Message: 'Updated About' });
 };
 
 exports.getData = getData;
+exports.createAbout = createAbout;
 exports.updateAbout = updateAbout;
